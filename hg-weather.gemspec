@@ -7,11 +7,11 @@ Gem::Specification.new do |spec|
   spec.name          = "hg-weather"
   spec.version       = HG::Weather::VERSION
   spec.authors       = ["Hugo Demiglio"]
-  spec.email         = ["hugo@formaweb.com.br"]
+  spec.email         = ["hugodemiglio@gmail.com"]
 
-  spec.description   = %q{Get weather data from HG Weather.}
+  spec.description   = %q{Get current and forecast weather using HG Weather API.}
   spec.summary       = %q{Simple gem to get weather data from HG Weather.}
-  spec.homepage      = 'https://github.com/hugodemiglio/hg-weather-gem'
+  spec.homepage      = 'http://hgbrasil.com/weather'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files lib`.split($/)
