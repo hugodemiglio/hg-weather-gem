@@ -1,6 +1,6 @@
-# HG::Weather
+# HG Weather
 
-Now you can simply get current and forecast data from HG Weather API directly on your Ruby Application.
+Now you can simple get current and forecast data from HG Weather API directly on your Ruby Application.
 
 ## Installation
 
