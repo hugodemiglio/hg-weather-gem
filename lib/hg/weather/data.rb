@@ -61,7 +61,7 @@ module HG
           max_temperature: r['max'],
           min_temperature: r['min'],
           description: r['description'],
-          condition_slug: r['condition'],
+          slug: r['condition'],
           is_forecast: true
         }
       end

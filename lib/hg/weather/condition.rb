@@ -1,4 +1,5 @@
 require 'hg/weather/temperature'
+require 'hg/weather/speed'
 
 module HG
   module Weather
@@ -54,7 +55,7 @@ module HG
           @image_id         = options[:image_id] if options[:image_id]
           @description      = options[:description] if options[:description]
           @slug             = options[:slug].to_sym if options[:slug]
-          @wind_speed       = options[:wind_speed] if options[:wind_speed]
+          @wind_speed       = Speed.new(options[:wind_speed]) if options[:wind_speed]
           @currently        = (options[:currently] == 'dia' ? :day : :night) if options[:currently]
           @datetime         = process_datetime(options[:date], options[:time]) if options[:date]
           @sunrise          = process_sunrise(options[:sunrise]) if options[:sunrise]
