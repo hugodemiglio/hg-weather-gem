@@ -1,6 +1,7 @@
 # HG Weather
 
 Welcome to official HG Weather's Ruby Gem!
+
 Now you can simple get current and forecast data from HG Weather API directly on your Ruby Application.
 
 ## Installation
@@ -29,7 +30,7 @@ You can configure all of HG Weather params, but not all of them are required.
 require 'hg/weather'
 
 HG::Weather.setup do |config|
-  # You can generate your key on [hgbrasil.com/weather](http://hgbrasil.com/status/weather/#chaves-de-api)
+  # You can generate your key on hgbrasil.com/weather
   # Key is required for search by name, geolocation or IP.
   config.api_key = 'my-key'
 
