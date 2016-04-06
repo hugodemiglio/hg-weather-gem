@@ -1,5 +1,6 @@
 # HG Weather
 
+Welcome to official HG Weather's Ruby Gem!
 Now you can simple get current and forecast data from HG Weather API directly on your Ruby Application.
 
 ## Installation
@@ -22,13 +23,13 @@ Or install it yourself as:
 
 ### Configuring
 
-You can configure all of HG Weather params, but not of them are required.
+You can configure all of HG Weather params, but not all of them are required.
 
 ```ruby
 require 'hg/weather'
 
 HG::Weather.setup do |config|
-  # You can generate your key on hgbrasil.com/weather
+  # You can generate your key on [hgbrasil.com/weather](http://hgbrasil.com/status/weather/#chaves-de-api)
   # Key is required for search by name, geolocation or IP.
   config.api_key = 'my-key'
 
@@ -110,6 +111,26 @@ Slug can describe weather condition for your application. It is a simple represe
 - cloudly_night
 - none_day (error to get, but it is day)
 - none_night (error to get, but it is night)
+
+## API Key and Status of Service
+
+Some features like search by geolocation or geoIP requires an API Key.
+
+You can generate your key on official webpage of HG Weather.
+There you also find the status of API service.
+
+[hgbrasil.com/weather](http://hgbrasil.com/status/weather/#chaves-de-api)
+
+## Upcoming features
+
+### API Level
+
+- Worldwide weather data (currently only for Brazil)
+- Search by WOEID (Yahoo Where on Earth ID)
+
+### Gem level
+
+- Cache with Rails cache engine
 
 ## Development
 
