@@ -67,11 +67,11 @@ weather.cid # => 'BRXX0198'
 weather.condition
 # Will return a HG::Weather::Data object, with current weather data
 
-weather.condition.temperature # => HG::Weather::Temperature
+weather.condition.temperature # => 23.0º C
 weather.condition.temperature.celsius # => 23.0
 weather.condition.temperature.fahrenheit # => 73.4
 
-weather.condition.wind_speed # => HG::Weather::Speed
+weather.condition.wind_speed # => 11.27 Km/h
 weather.condition.wind_speed.km_h # => 11.27
 weather.condition.wind_speed.miles_h # => 7.002
 
