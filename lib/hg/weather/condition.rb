@@ -74,6 +74,26 @@ module HG
         self.currently == :night
       end
 
+      def to_s separator = ' - '
+        to_return = []
+
+        to_return << self.datetime.strftime('%d/%m') if self.datetime && self.datetime.kind_of?(Time) && self.is_forecast
+
+        to_return << self.temperature.to_s if self.temperature
+        to_return << 'Max: ' + self.max_temperature.to_s if self.max_temperature
+        to_return << 'Min: ' + self.min_temperature.to_s if self.min_temperature
+
+        to_return << self.humidity.to_s + ' %' if self.humidity
+        to_return << self.wind_speed.to_s if self.wind_speed
+
+        to_return << 'Sunrise: ' + self.sunrise.strftime('%H:%M') if self.sunrise && self.sunrise.kind_of?(Time)
+        to_return << 'Sunset: ' + self.sunset.strftime('%H:%M') if self.sunset && self.sunset.kind_of?(Time)
+
+        to_return << self.description.to_s if self.description
+
+        return to_return.join(separator)
+      end
+
       protected
       def process_datetime date, time = nil
         return Time.now if date.nil?

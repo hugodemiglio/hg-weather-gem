@@ -17,6 +17,14 @@ module HG
           @celsius = (temperature - 32) / 1.8
         end
       end
+
+      def inspect
+        self.to_s
+      end
+
+      def to_s
+        "#{@celsius}º C"
+      end
     end
 
   end

@@ -19,6 +19,14 @@ module HG
           @km_h = speed * 1.60934
         end
       end
+
+      def inspect
+        self.to_s
+      end
+
+      def to_s
+        "#{@km_h} km/h"
+      end
     end
 
   end
