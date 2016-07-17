@@ -11,22 +11,43 @@ module HG
     class << self
       # API Key
       attr_accessor :api_key
-      @@api_key = nil
+
+      # Locale
+      attr_accessor :locale
+
+      # Default temperature format
+      attr_accessor :temperature
+
+      # Default speed format
+      attr_accessor :speed
 
       # API Key status
       attr_reader :api_key_status
-      @@api_key_status = :unknown
 
       # Use SSL to access the API
       attr_accessor :use_ssl
-      @@use_ssl = true
 
       # Use Rails cache for recieved data (realy recommended)
       attr_accessor :use_rails_cache
-      @@use_rails_cache = true
 
-      attr_accessor :cid, :city_name, :latitude, :longitude, :client_ip
+      attr_accessor :cid, :woeid, :city_name, :latitude, :longitude, :client_ip
       @@client_ip = :remote
+    end
+
+    def self.locale
+      @locale || :en
+    end
+
+    def self.temperature
+      @temperature || Locale.get_format(:temperature)
+    end
+
+    def self.speed
+      @speed || Locale.get_format(:speed)
+    end
+
+    def self.use_ssl
+      @use_ssl || true
     end
 
     def self.setup(&block)
@@ -37,7 +58,7 @@ module HG
       to_request = {
         lat: options[:latitude], lon: options[:longitude],
         cid: options[:cid], city_name: options[:city_name],
-        user_ip: options[:client_ip]
+        user_ip: options[:client_ip], woeid: options[:woeid]
       }.delete_if{|k,v| v.nil?}
 
       process(to_request)
@@ -55,8 +76,10 @@ module HG
         lon: self.longitude,
         user_ip: self.client_ip,
         cid: self.cid,
+        woeid: self.woeid,
         city_name: self.city_name,
         key: self.api_key,
+        locale: self.locale,
         format: :json,
         sdk_version: "ruby_#{HG::Weather::VERSION}"
       }

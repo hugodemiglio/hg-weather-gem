@@ -13,10 +13,19 @@ module HG
 
         if format == :km
           @km_h = speed
-          @miles_h = speed * 0.621371
+          @miles_h = (speed * 0.621371).round(2)
         else
           @miles_h = speed
-          @km_h = speed * 1.60934
+          @km_h = (speed * 1.60934).round(2)
+        end
+      end
+
+      def get_with_format
+        case Weather.speed
+        when :km
+          @km_h
+        when :miles
+          @miles_h
         end
       end
 
@@ -25,7 +34,15 @@ module HG
       end
 
       def to_s
-        "#{@km_h} km/h"
+        "#{self.get_with_format} #{Weather.speed.to_s.downcase}/h"
+      end
+
+      def to_f
+        self.get_with_format
+      end
+
+      def to_i
+        self.get_with_format.to_i
       end
     end
 

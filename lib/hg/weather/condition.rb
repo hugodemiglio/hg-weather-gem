@@ -1,5 +1,6 @@
 require 'hg/weather/temperature'
 require 'hg/weather/speed'
+require 'hg/weather/locale'
 
 module HG
   module Weather
@@ -56,7 +57,7 @@ module HG
           @description      = options[:description] if options[:description]
           @slug             = options[:slug].to_sym if options[:slug]
           @wind_speed       = Speed.new(options[:wind_speed]) if options[:wind_speed]
-          @currently        = (options[:currently] == 'dia' ? :day : :night) if options[:currently]
+          @currently        = (options[:currently] == Locale.get_format(:day).to_s ? :day : :night) if options[:currently]
           @datetime         = process_datetime(options[:date], options[:time]) if options[:date]
           @sunrise          = process_sunrise(options[:sunrise]) if options[:sunrise]
           @sunset           = process_sunset(options[:sunset]) if options[:sunset]
@@ -77,7 +78,7 @@ module HG
       def to_s separator = ' - '
         to_return = []
 
-        to_return << self.datetime.strftime('%d/%m') if self.datetime && self.datetime.kind_of?(Time) && self.is_forecast
+        to_return << self.datetime.strftime(Locale.get_format(:short_date)) if self.datetime && self.datetime.kind_of?(Time) && self.is_forecast
 
         to_return << self.temperature.to_s if self.temperature
         to_return << 'Max: ' + self.max_temperature.to_s if self.max_temperature
@@ -86,19 +87,23 @@ module HG
         to_return << self.humidity.to_s + ' %' if self.humidity
         to_return << self.wind_speed.to_s if self.wind_speed
 
-        to_return << 'Sunrise: ' + self.sunrise.strftime('%H:%M') if self.sunrise && self.sunrise.kind_of?(Time)
-        to_return << 'Sunset: ' + self.sunset.strftime('%H:%M') if self.sunset && self.sunset.kind_of?(Time)
+        to_return << "#{Locale.get_format(:sunrise).to_s.capitalize}: " + self.sunrise.strftime('%H:%M') if self.sunrise && self.sunrise.kind_of?(Time)
+        to_return << "#{Locale.get_format(:sunset).to_s.capitalize}: " + self.sunset.strftime('%H:%M') if self.sunset && self.sunset.kind_of?(Time)
 
         to_return << self.description.to_s if self.description
 
         return to_return.join(separator)
       end
 
+      def inspect
+        self.to_s
+      end
+
       protected
       def process_datetime date, time = nil
         return Time.now if date.nil?
 
-        return Time.strptime((date + ' ' + (time ? time : '00:00')), '%d/%m/%Y %H:%M')
+        return Time.strptime((date + ' ' + (time ? time : '00:00')), Locale.get_format(:datetime))
       end
 
       def process_sunset sunset

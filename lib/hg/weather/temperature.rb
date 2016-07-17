@@ -11,10 +11,19 @@ module HG
 
         if format == :c
           @celsius = temperature
-          @fahrenheit = (temperature * 1.8) + 32
+          @fahrenheit = ((temperature * 1.8) + 32).round(2)
         else
           @fahrenheit = temperature
-          @celsius = (temperature - 32) / 1.8
+          @celsius = ((temperature - 32) / 1.8).round(2)
+        end
+      end
+
+      def get_with_format
+        case Weather.temperature
+        when :celsius
+          @celsius
+        when :fahrenheit
+          @fahrenheit
         end
       end
 
@@ -23,7 +32,15 @@ module HG
       end
 
       def to_s
-        "#{@celsius}º C"
+        "#{self.get_with_format}º #{Weather.temperature.to_s[0].upcase}"
+      end
+
+      def to_f
+        self.get_with_format
+      end
+
+      def to_i
+        self.get_with_format.to_i
       end
     end
 

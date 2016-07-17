@@ -6,7 +6,7 @@ module HG
     class Data
 
       attr_accessor :request, :requested_at, :key_status
-      attr_accessor :condition, :forecast
+      attr_accessor :condition, :forecast, :woeid
       attr_accessor :cid, :city_name, :search_method
 
       def initialize params, host_name, use_ssl = true
@@ -19,11 +19,12 @@ module HG
         if request_data['results']
           results = request_data['results']
 
-          @key_status = (params[:key] ? (request_data['key_status'] == 'valida' ? :valid : :invalid) : :empty)
+          @key_status = (params[:key] ? (request_data['key_status'] ? :valid : :invalid) : :empty)
 
           @city_name = results['city_name']
           @search_method = request_data['by']
           @cid = results['cid']
+          @woeid = params[:woeid] if request_data['by'] == 'woeid'
 
           @condition = Condition.new(to_current(results))
 
@@ -57,7 +58,7 @@ module HG
       # TODO: Improve to get year of date
       def to_forecast r
         {
-          date: r['date'] + '/' + Time.now.year.to_s,
+          date: (Weather.locale == :en ? Time.now.year.to_s + '-' + r['date'] : r['date'] + '/' + Time.now.year.to_s),
           max_temperature: r['max'],
           min_temperature: r['min'],
           description: r['description'],
