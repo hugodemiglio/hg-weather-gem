@@ -2,7 +2,9 @@
 
 Welcome to official HG Weather's Ruby Gem!
 
-Now you can simple get worldwide current and forecast data from HG Weather API directly on your Ruby Application, of any city in the world!
+Now you can simple get worldwide weather data (current and forecast) from HG Weather API directly on your Ruby Application!
+
+You can search any city in the world!
 
 ## Installation
 
@@ -125,9 +127,13 @@ Você pode definir inline ou por bloco:
 ```ruby
 require 'hg/weather'
 
+# Definir por bloco:
 HG::Weather.setup do |config|
-
+  config.locale = 'pt-br'
 end
+
+# Definir inline:
+HG::Weather.locale = 'pt-br'
 
 ```
 
