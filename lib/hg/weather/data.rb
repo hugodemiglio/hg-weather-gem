@@ -45,7 +45,7 @@ module HG
           slug: r['condition_slug'],
           wind_speed: r['wind_speedy'],
           humidity: r['humidity'],
-          image_id: r['image_id'],
+          img_id: r['img_id'],
           sunrise: r['sunrise'],
           sunset: r['sunset'],
           currently: r['currently'],
@@ -62,6 +62,7 @@ module HG
           max_temperature: r['max'],
           min_temperature: r['min'],
           description: r['description'],
+          img_id: r['img_id'],
           slug: r['condition'],
           is_forecast: true
         }
