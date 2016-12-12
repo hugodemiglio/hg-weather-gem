@@ -21,7 +21,7 @@ module HG
       attr_accessor :humidity
 
       # Public: Image ID
-      attr_accessor :img_id
+      attr_accessor :image_id
 
       # Public: Description
       attr_accessor :description
@@ -53,7 +53,7 @@ module HG
           @max_temperature  = Temperature.new(options[:max_temperature]) if options[:max_temperature]
           @min_temperature  = Temperature.new(options[:min_temperature]) if options[:min_temperature]
           @humidity         = options[:humidity].to_i if options[:humidity]
-          @img_id         = options[:img_id] if options[:img_id]
+          @image_id         = options[:image_id] if options[:image_id]
           @description      = options[:description] if options[:description]
           @slug             = options[:slug].to_sym if options[:slug]
           @wind_speed       = Speed.new(options[:wind_speed]) if options[:wind_speed]
